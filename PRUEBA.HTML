@@ -1,0 +1,203 @@
+<html>
+<head>
+  <title>Centro de Masajes Javier</title>
+  <style>
+    /* Estilos CSS para la página */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .nav a:hover {
+      color: #fff;
+      background-color: #555;
+    }
+
+    .main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .main .map {
+      width: 60%;
+      height: 400px;
+      margin-right: 20px;
+    }
+
+    .main .tweets {
+      width: 35%;
+      height: 400px;
+      overflow: auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+    }
+
+    .main .tweets h2 {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+
+    .main .tweets .tweet {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .main .tweets .tweet img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .main .tweets .tweet p {
+      margin: 0;
+    }
+
+/* Estilos para la sección de servicios */
+.services {
+  display: block;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+/* Estilos para la sección de contacto */
+.contact {
+  display: block;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  flex-direction: column;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Centro de Masajes Javier</h1>
+    </header>
+    <nav class="nav">
+      <a href="#">Inicio</a>
+      <a href="#">Servicios</a>
+      <a href="#">Precios</a>
+      <a href="#">Contacto</a>
+    </nav>
+    <main class="main">
+
+	      <!-- Twitter -->
+      <div class="tweets">
+        <h2>Últimos tweets</h2>
+        <div id="twitter-feed">
+          <!-- Aquí se mostrarán los tweets -->
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    // Función para obtener los tweets de la cuenta @JavierFN_1
+    function getTweets() {
+      // URL de la API de Twitter
+      const apiUrl = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+
+      // Parámetros de la API
+      const params = {
+        screen_name: "JavierFN_1",
+        count: 10,
+      };
+
+      // Realizamos una llamada a la API de Twitter
+      fetch(apiUrl + "?" + new URLSearchParams(params))
+        .then((response) => response.json())
+        .then((tweets) => {
+          // Recorremos los tweets obtenidos
+          tweets.forEach((tweet) => {
+            // Creamos un elemento HTML para cada tweet
+            const tweetElement = document.createElement("div");
+            tweetElement.classList.add("tweet");
+
+            // Añadimos la imagen del usuario y el texto del tweet
+            tweetElement.innerHTML = `
+              <img src="${tweet.user.profile_image_url}" alt="${tweet.user.name}">
+              <p>${tweet.text}</p>
+            `;
+
+            // Añadimos el tweet al feed
+            document.getElementById("twitter-feed").appendChild(tweetElement);
+          });
+        });
+    }
+
+    // Llamamos a la función cuando la página cargue
+    window.onload = function () {
+      getTweets();
+    };
+  </script>
+  
+  <!-- Servicios -->
+<div class="services">
+  <h2>Servicios</h2>
+  <ul>
+    <li>Masaje relajante</li>
+    <li>Masaje deportivo</li>
+    <li>Masaje de piedras calientes</li>
+    <li>Masaje con velas</li>
+  </ul>
+</div>
+
+<!-- Contacto -->
+<div class="contact">
+  <h2>Contacto</h2>
+  <p>Dirección: CALLE FALSA 123</p>
+  <p>Teléfono: NUMERO DE TELEFONO FALSO 1238103718</p>
+</div>
+
+
+</body>
+</html>
+
